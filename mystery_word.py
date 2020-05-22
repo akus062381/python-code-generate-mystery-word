@@ -1,23 +1,59 @@
 import random
+alphabet = [
+    "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
+    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", 
+    "y", "z",
+]
 
 def call_random_word():
     # print(random.choice(open("words.txt").read().split()))
     random_word = (random.choice(open("words.txt").read().split()))
+    return random_word
+    
+def length_word():
+    random_word = (random.choice(open("words.txt").read().split()))
     length_word = (len(random_word) * "_ ")
     return length_word
 
-# def letter_guess(letter, guesses):
-    # word = 
+def start_game():
+    random_word_call = call_random_word()
+    word_length = length_word()
+    print("The mystery word is: " + word_length)
+    print("You have 8 guesses available to you, 1 letter per guess!")
 
+def user_guesses(alphabet):
+    guess_by_user = input("Enter your first guess: ")
+    if guess_by_user.isalpha():
+        return guess_by_user
+    else:
+        print("Try again")
+
+
+# def letter_guess(letter, random_wordpull):
+#     random_wordpull = call_random_word()
+#     output = []
+#     if letter in random_wordpull:
+#         return letter
+#     else:
+#         return "_"
+
+#     for letter in random_wordpull:
+#         output.append(letter_guess(letter))
+#     return output
+
+    
 
 
 def game_sequence():
-    random_word_call = call_random_word()
-    print("The mystery word is: " + random_word_call)
-    print("You have 8 guesses available to you, 1 letter per guess!")
-    print("Your first guess: ")
+    start_game()
+    letter = user_guesses(alphabet)
+    random_wordpull = call_random_word()
+    user_guesses(alphabet)
+    # letter_guess(letter, random_wordpull)
 
 game_sequence()
+
+
 
 
 # game starts by showing user how many characters in the word
