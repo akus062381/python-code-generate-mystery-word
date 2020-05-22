@@ -5,53 +5,53 @@ alphabet = [
     "y", "z",
 ]
 
-def call_random_word():
-    # print(random.choice(open("words.txt").read().split()))
+def get_random_word():
     random_word = (random.choice(open("words.txt").read().split()))
-    return random_word
+    print(random_word.lower())
+    return random_word.lower()
     
-def length_word():
-    random_word = (random.choice(open("words.txt").read().split()))
-    length_word = (len(random_word) * "_ ")
-    return length_word
 
-def start_game():
-    random_word_call = call_random_word()
-    word_length = length_word()
-    print("The mystery word is: " + word_length)
-    print("You have 8 guesses available to you, 1 letter per guess!")
+# def start_game():
+#     random_word_call = get_random_word()
+#     word_display = display_word(random_word_call)
+#     print("The mystery word is: " + word_display)
+#     print("You have 8 guesses available to you, 1 letter per guess!")
 
-def user_guesses(alphabet):
-    guess_by_user = input("Enter your first guess: ")
-    if guess_by_user.isalpha():
-        return guess_by_user
+def user_guesses():
+    count = 1
+    while(count <= 8):
+        guess_by_user = input("Enter your guess: ")
+        if (len(str(guess_by_user)) == 1) and (guess_by_user.isalpha()):
+            count = count + 1
+            print("Guess again")
+        else:
+            break
+    return guess_by_user
+
+word = get_random_word()
+current_guesses = user_guesses()
+
+def letter_guess(letter, guesses):
+    if letter in guesses:
+        return letter
     else:
-        print("Try again")
+        return "_"
+output = []
+for letter in word:
+    output.append(letter_guess(letter, current_guesses))
+print(output)
 
 
-# def letter_guess(letter, random_wordpull):
-#     random_wordpull = call_random_word()
-#     output = []
-#     if letter in random_wordpull:
-#         return letter
-#     else:
-#         return "_"
-
-#     for letter in random_wordpull:
-#         output.append(letter_guess(letter))
-#     return output
 
     
 
 
-def game_sequence():
-    start_game()
-    letter = user_guesses(alphabet)
-    random_wordpull = call_random_word()
-    user_guesses(alphabet)
-    # letter_guess(letter, random_wordpull)
+# def game_sequence():
+#     start_game()
+#     user_guesses(alphabet)
 
-game_sequence()
+
+# game_sequence()
 
 
 
