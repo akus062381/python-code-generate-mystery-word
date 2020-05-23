@@ -7,51 +7,63 @@ alphabet = [
 
 def get_random_word():
     random_word = (random.choice(open("words.txt").read().split()))
-    print(random_word.lower())
+    # print(random_word.lower())
     return random_word.lower()
-    
 
-# def start_game():
-#     random_word_call = get_random_word()
-#     word_display = display_word(random_word_call)
-#     print("The mystery word is: " + word_display)
-#     print("You have 8 guesses available to you, 1 letter per guess!")
 
 def user_guesses():
-    count = 1
-    while(count <= 8):
+    while True:
         guess_by_user = input("Enter your guess: ")
         if (len(str(guess_by_user)) == 1) and (guess_by_user.isalpha()):
-            count = count + 1
-            print("Guess again")
-        else:
             break
+        else:
+            print("Guess again")
     return guess_by_user
 
-word = get_random_word()
-current_guesses = user_guesses()
 
 def letter_guess(letter, guesses):
     if letter in guesses:
         return letter
     else:
         return "_"
-output = []
-for letter in word:
-    output.append(letter_guess(letter, current_guesses))
-print(output)
 
 
+def game_sequence():
+    print("You have 8 guesses available to you, 1 letter per guess!")
 
-    
+    word = get_random_word()
+    current_guesses = []
+    guesses = 0
+    while guesses < 8:
+        for letter in word:
+            print(letter_guess(letter, current_guesses), end = ' ')
+        guess = user_guesses()
+        guesses = guesses + 1
 
+        all_correct = True
+        for letter in word:
+            if letter not in current_guesses:
+                all_correct = False
+        if all_correct:
+            play_again = input("You win! Play again? y or n: ")
+            if play_again == "y":
+                game_sequence()
+            else:
+                return
 
-# def game_sequence():
-#     start_game()
-#     user_guesses(alphabet)
+        if guess in word:
+            current_guesses.append(guess)
+            print("Correct! Guess again.")
+        else:
+            print("Guess was incorrect")
+        if guesses == 8:
+            play_again = input("Play again? y or n: ")
+            if play_again == "y":
+                game_sequence()
+            return
+        print("Guess again!")
 
-
-# game_sequence()
+game_sequence()
 
 
 
