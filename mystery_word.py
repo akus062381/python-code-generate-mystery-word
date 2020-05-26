@@ -27,13 +27,18 @@ def letter_guess(letter, guesses):
     else:
         return "_"
 
+def calculate_guess_left(word, guesses):
+    word = get_random_word()
+    guesses = 0
+    bad_guesses = [guess for guess in guesses if guess not in word]
+    return 8 - len(bad_guesses)
 
 def game_sequence():
     print("You have 8 guesses available to you, 1 letter per guess!")
-
     word = get_random_word()
     current_guesses = []
     guesses = 0
+    # remaining_guesses = calculate_guess_left(word, guesses)
     while guesses < 8:
         for letter in word:
             print(letter_guess(letter, current_guesses), end = ' ')
